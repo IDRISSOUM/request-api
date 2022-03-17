@@ -23,10 +23,9 @@ export const editEvent = async (id, event) => {
 const citiesUrl = 'https://testapi.photodino.de/cities/';
 
 export const getCities = async (id) => {
-     id = id || '';
+    id = id || '';
     return await axios.get(`${citiesUrl}${id}`);
-   
-   
+
 }
 
 export const addCities = async (cities) => {

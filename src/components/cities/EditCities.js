@@ -32,7 +32,7 @@ const EditCities = () => {
     }, []);
 
     const loadUserDetails = async() => {
-        const response = await getCities(id);
+        const response = await getCities(`${id}/`);
         setCities(response.data);
     }
 

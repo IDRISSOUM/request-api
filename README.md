@@ -3,6 +3,7 @@
 test api request CRUD, search, filter
 
 ## Getting started
+<input type="text" value={title}  name="name" placeholder="Name" className="form-control" onChange={ (e) => { console.log('EEEEEEE', e); setTitle(e.target.value) }} />
 
 To make it easy for you to get started with GitLab, here's a list of recommended next steps.
 

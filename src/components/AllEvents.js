@@ -81,7 +81,7 @@ function AllEvents() {
         </Table>
         <br/>
         <div className="d-flex justify-content-center">
-         <Link to="/add-l" type="button" className="btn btn-secondary ml-2"><Button>Add Event</Button></Link>
+         <Link to="/add" type="button" className="btn btn-secondary ml-2"><Button>Add Event</Button></Link>
         </div>
      </>
     )

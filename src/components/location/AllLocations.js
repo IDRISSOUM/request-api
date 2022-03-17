@@ -63,26 +63,26 @@ function AllLocate() {
                 </TableRow>
             </TableHead>
             <TableBody>
-                {locate.map((cities) => (
+                {locate.map((locate) => (
                     <TableRow className={classes.row} key={locate.id}>
-                        <TableCell>{cities.id}</TableCell>
-                        <TableCell>{cities.name}</TableCell>
-                        <TableCell>{cities.rent}</TableCell>
-                        <TableCell>{cities.email}</TableCell>
-                        <TableCell>{cities.phone}</TableCell>
-                        <TableCell>{cities.contact_person}</TableCell>
-                        <TableCell>{cities.lon}</TableCell>
-                        <TableCell>{cities.lat}</TableCell>
-                        <TableCell>{cities.street_number}</TableCell>
-                        <TableCell>{cities.street_name}</TableCell>
-                        <TableCell>{cities.postal_code}</TableCell>
-                        <TableCell>{cities.status}</TableCell>
-                        <TableCell>{cities.time_added}</TableCell>
+                        <TableCell>{locate.id}</TableCell>
+                        <TableCell>{locate.name}</TableCell>
+                        <TableCell>{locate.rent}</TableCell>
+                        <TableCell>{locate.email}</TableCell>
+                        <TableCell>{locate.phone}</TableCell>
+                        <TableCell>{locate.contact_person}</TableCell>
+                        <TableCell>{locate.lon}</TableCell>
+                        <TableCell>{locate.lat}</TableCell>
+                        <TableCell>{locate.street_number}</TableCell>
+                        <TableCell>{locate.street_name}</TableCell>
+                        <TableCell>{locate.postal_code}</TableCell>
+                        <TableCell>{locate.status}</TableCell>
+                        <TableCell>{locate.time_added}</TableCell>
                         <TableCell>
-                            <Button color="primary" variant="contained" style={{marginRight:5}} element={Link} to={`/edit-l/${locate.id}`}>Edit</Button>
+                            <Button color="primary" variant="contained" style={{marginRight:5}} component={Link} to={`/edit-l/${locate.id}`}>Edit</Button>
                         </TableCell>
                         <TableCell>
-                            <Button color="secondary" variant="contained" onClick={() => deleteLocateData(cities.id)}>Delete</Button> 
+                            <Button color="secondary" variant="contained" onClick={() => deleteLocateData(locate.id)}>Delete</Button> 
                         </TableCell>
                     </TableRow>
                 ))}

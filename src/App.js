@@ -10,7 +10,7 @@ import EditCities from './components/cities/EditCities'
 import AddCities from './components/cities/AddCities'
 import AllLocations from './components/location/AllLocations'
 import AddLocations from './components/location/AddLocation'
-import EditLocations from './components/location/EditLocation'
+import EditLocation from './components/location/EditLocation'
 import {
   BrowserRouter,
   Routes,
@@ -32,7 +32,7 @@ function App() {
         <Route path="/all-ci" element={<AllCities />} />
         <Route path="/all-l" element={<AllLocations />} />
         <Route path="/add-l" element={<AddLocations />} />
-        <Route path="/edit-l/:id" element={<EditLocations />} />
+        <Route path="/edit-l/:id" element={<EditLocation />} />
         {/* <Route  element={<NotFound />} /> */}
     </Routes>
     </BrowserRouter>

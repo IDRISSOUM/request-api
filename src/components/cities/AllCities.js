@@ -70,7 +70,7 @@ function AllCities() {
         </Table>
         <br/>
         <div className="d-flex justify-content-center">
-            <Link to="/add-l" type="button" className="btn btn-secondary ml-2"><Button>Add Cities</Button></Link>
+            <Link to="/add-ci" type="button" className="btn btn-secondary ml-2"><Button>Add Cities</Button></Link>
         </div>
         </>
     )
