@@ -74,13 +74,11 @@ function AllLocate() {
                         <TableCell>Rent</TableCell>
                         <TableCell>Email</TableCell>
                         <TableCell>Phone</TableCell>
-                        <TableCell>Contact Person</TableCell>
                         <TableCell>Coordinates</TableCell>
                         <TableCell>Street Number</TableCell>
                         <TableCell>Street Name</TableCell>
                         <TableCell>Code Postal</TableCell>
                         <TableCell>Status</TableCell>
-                        <TableCell>Date Created</TableCell>
                         <TableCell>Date Created</TableCell>
                     </TableRow>
                 </TableHead>
@@ -94,16 +92,14 @@ function AllLocate() {
                                     <TableCell>{item.rent}</TableCell>
                                     <TableCell>{item.email}</TableCell>
                                     <TableCell>{item.phone}</TableCell>
-                                    <TableCell>{item.contact_person}</TableCell>
-                                    <TableCell>{item.lon}</TableCell>
-                                    <TableCell>{item.lat}</TableCell>
+                                    <TableCell>{item.coordinates}</TableCell>
                                     <TableCell>{item.street_number}</TableCell>
                                     <TableCell>{item.street_name}</TableCell>
                                     <TableCell>{item.postal_code}</TableCell>
                                     <TableCell>{item.status}</TableCell>
                                     <TableCell>{item.time_added}</TableCell>
                                     <TableCell>
-                                        <Button color="primary" variant="contained" style={{marginRight:5}} component={Link} to={`/edit-l/${item.id}`}>Edit</Button>
+                                        <Button color="primary" variant="contained" component={Link} to={`/edit-l/${item.id}`}>Edit</Button>
                                     </TableCell>
                                     <TableCell>
                                         <Button color="secondary" variant="contained" onClick={() => deleteLocateData(item.id)}>Delete</Button> 
@@ -119,16 +115,14 @@ function AllLocate() {
                                         <TableCell>{item.rent}</TableCell>
                                         <TableCell>{item.email}</TableCell>
                                         <TableCell>{item.phone}</TableCell>
-                                        <TableCell>{item.contact_person}</TableCell>
-                                        <TableCell>{item.lon}</TableCell>
-                                        <TableCell>{item.lat}</TableCell>
+                                        <TableCell>{item.coordinates}</TableCell>
                                         <TableCell>{item.street_number}</TableCell>
                                         <TableCell>{item.street_name}</TableCell>
                                         <TableCell>{item.postal_code}</TableCell>
                                         <TableCell>{item.status}</TableCell>
                                         <TableCell>{item.time_added}</TableCell>
                                         <TableCell>
-                                            <Button color="primary" variant="contained" style={{marginRight:5}} component={Link} to={`/edit-l/${item.id}`}>Edit</Button>
+                                            <Button color="primary" variant="contained" component={Link} to={`/edit-l/${item.id}`}>Edit</Button>
                                         </TableCell>
                                         <TableCell>
                                             <Button color="secondary" variant="contained" onClick={() => deleteLocateData(item.id)}>Delete</Button> 

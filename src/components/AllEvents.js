@@ -113,7 +113,7 @@ function AllEvents() {
                                 <TableCell>{item.created}</TableCell>
                                 <TableCell>{item.status}</TableCell>
                                 <TableCell>
-                                    <Button color="primary" variant="contained" style={{marginRight:5}} component={Link} to={`/edit/${item.id}`}>Edit</Button>
+                                    <Button color="primary" variant="contained" component={Link} to={`/edit/${item.id}`}>Edit</Button>
                                 </TableCell>
                                 <TableCell>
                                     <Button color="secondary" variant="contained" onClick={() => deleteEventData(item.id)}>Delete</Button> 

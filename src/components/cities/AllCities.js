@@ -98,7 +98,7 @@ function AllCities() {
                             <TableCell>{item.name}</TableCell>
                             <TableCell>{item.time_added}</TableCell>
                             <TableCell>
-                                <Button color="primary" variant="contained" style={{marginRight:5}} component={Link} to={`/edit-ci/${item.id}`}>Edit</Button>
+                                <Button color="primary" variant="contained" component={Link} to={`/edit-ci/${item.id}`}>Edit</Button>
                             </TableCell>
                             <TableCell>
                                 <Button color="secondary" variant="contained" onClick={() => deleteCitiesData(item.id)}>Delete</Button> 

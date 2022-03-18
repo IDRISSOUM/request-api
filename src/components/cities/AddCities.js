@@ -8,20 +8,10 @@ const initialValue = {
     code: '',
 }
 
-const useStyles = makeStyles({
-    container: {
-        width: '50%',
-        margin: '5% 0 0 25%',
-        '& > *': {
-            marginTop: 20
-        }
-    }
-})
 
 const AddCities = () => {
     const [cities, setCities] = useState(initialValue);
     const { name, code } = cities;
-    const classes = useStyles();
     let navigate = useNavigate();
 
     const onValueChange = (e) => {
