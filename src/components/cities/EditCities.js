@@ -37,9 +37,8 @@ const EditCities = () => {
     }
 
     const editUserDetails = async() => {
-        // eslint-disable-next-line no-unused-vars
         const response = await editCities(id, cities);
-        navigate.push('/all/');
+        navigate("/all-ci", { replace: true });
     }
 
     const onValueChange = (e) => {
@@ -48,22 +47,28 @@ const EditCities = () => {
     }
 
     return (
-        <FormGroup className={classes.container}>
-            <Typography variant="h4">Edit Information</Typography>
-            <FormControl>
-                <InputLabel htmlFor="my-input">Name</InputLabel>
-                <Input onChange={(e) => onValueChange(e)} name='name' value={name} id="my-input" aria-describedby="my-helper-text" />
-            </FormControl>
-            <FormControl>
-                <InputLabel htmlFor="my-input">Code</InputLabel>
-                <Input onChange={(e) => onValueChange(e)} name='username' value={code} id="my-input" aria-describedby="my-helper-text" />
-            </FormControl>
-            <FormControl>
-                <Button variant="contained" color="primary" onClick={() => editUserDetails()}>Edit Cities</Button>
-            </FormControl>
-            
-            <Link to="/all-ci" className="btn btn-primary ml-2"><Button>Cancel</Button></Link>
-        </FormGroup>
+
+        <div className="container p-5">
+            <form className="form-group">
+                <h1 style={{justifyContent: 'center', textAlign: 'center', fontWeight: '500', fontSize: 30}}>New Event</h1>
+                <div className="row jumbotron justify-content-center">
+
+                    <div className="col-md-4 mb-3 mt-3">
+                        <label  htmlFor="name">Name</label>
+                        <input type="text" name="name" placeholder="Name" className="form-control" onChange={(e) => onValueChange(e)}  value={name} />
+                        <br/>
+                        <label htmlFor="code">Code</label>
+                        <input type="number" name="code" placeholder="4567" className="form-control" onChange={(e) => onValueChange(e)} value={code}/>
+                    </div>
+
+                    <br/>
+                    <div className="col-md-12 mb-3 mt-3" style={{textAlign:'center',}}>
+                        <Button type="button" class="btn btn-secondary" onClick={() => editUserDetails()}>Edit Cities</Button>
+                        <Link to="/all-ci" className="col-md-12" style={{textAlign:'center',}}><Button class="btn btn-danger m-3">Cancel</Button></Link>
+                    </div>
+                </div>
+            </form>
+        </div>
     )
 }
 

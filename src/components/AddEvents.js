@@ -1,49 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { addEvent, getLocations } from '../service/api';
 import {useNavigate, Link} from 'react-router-dom'
-import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
-import { Typography, makeStyles } from '@material-ui/core';
-import moment from 'moment'
-
-
-
-// const initialValue = {
-//     name: '',
-//     description: '',
-//     event_date,
-//  }
-// let select = moment(initialValue.event_date).format('YYYY-MM-DD');
-
-
-const useStyles = makeStyles({
-    container: {
-        width: '50%',
-        margin: '5% 0 0 25%',
-        '& > *': {
-            marginTop: 20
-        }
-    }
-})
-
+import { Button } from 'reactstrap';
 
 
 
 const AddEvents = () => {
-
-
     let navigate = useNavigate();
-    const classes = useStyles();
     const [locate, setLocate] = useState([]);
-    const [selectlocations, setSelectLocations] = useState();
     const [event, setEvents] = useState({
-        location: 102,
         name: '',
         description: '',
         event_date: '',
-     });
-     const {name, description, event_date, location} = event;
-    console.log('LLL??????????>>>>>>>>>', event)
-    console.log('LLL??????????', selectlocations)
+    });
+    const {name, description, event_date } = event;
 
 
     useEffect(() => {
@@ -55,29 +25,14 @@ const AddEvents = () => {
         setLocate(response.data);
     }
 
-    const choiceLocations = function(e) {
-        setSelectLocations(e.target.value)
-    }
-
     const onValueChange = (e) => {
         setEvents({...event, [e.target.name]: e.target.value})
     }
-
-    // const onValueEvent = (e) => {
-    //     console.log(e.target.value);
-    //     setLocate({...locate, [e.target.locate]: e.target.value})
-    // }
-
-    
 
     const addEventDetails = async() => {
         await addEvent(event);
         navigate("/all", { replace: true });
     }
-
-
-
-
 
     return (
         <div className="container p-5">
@@ -102,7 +57,7 @@ const AddEvents = () => {
 
                     <div className="col-md-2 mb-3 mt-3">
                         <label htmlFor="sel1" className="form-label">Select location:</label>
-                        <select className="form-select" id="sel2" name="select"  placeholder="Select location" onChange={choiceLocations} >
+                        <select className="form-select" name="location"  id="sel2" placeholder="Select location" onChange={(e) => onValueChange(e)} >
                             {locate.map(item => {  
                                 return (
                                 <option key={item.id} value={item.id}>

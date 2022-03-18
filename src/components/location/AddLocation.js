@@ -1,34 +1,24 @@
-import react, { useState } from 'react';
-import { FormGroup, FormControl, InputLabel, Input, Button, makeStyles, Typography } from '@material-ui/core';
+import react, { useState, useEffect } from 'react';
+import { Button } from '@material-ui/core';
 import { useNavigate } from 'react-router-dom';
-import { addLocations } from '../../service/api';
+import { addLocations, getCities } from '../../service/api';
 import {Link} from 'react-router-dom';
 
-const initialValue = {
-    name: '',
-    rent: '',
-    email: '',
-    phone: '',
-    coordinates: '',
-    street_number: '',
-    street_name: '',
-    postal_code: '',
-    status: '',
-    select: '',
-}
 
-const useStyles = makeStyles({
-    container: {
-        width: '50%',
-        margin: '5% 0 0 25%',
-        '& > *': {
-            marginTop: 20
-        }
-    }
-})
 
 const AddLocations = () => {
-    const [locate, setLocate] = useState(initialValue);
+    const [cities, setCities] = useState([]);
+    const [locate, setLocate] = useState({
+        name: '',
+        rent: '',
+        email: '',
+        phone: '',
+        coordinates: '',
+        street_number: '',
+        street_name: '',
+        postal_code: '',
+        status: '',
+    });
     const { 
         name, 
         rent, 
@@ -39,10 +29,19 @@ const AddLocations = () => {
         street_name, 
         postal_code, 
         status, 
-        select  
     } = locate;
-    const classes = useStyles();
     let navigate = useNavigate();
+
+    useEffect(() => {
+        getAllCities();
+    }, []);
+
+    const getAllCities = async () => {
+        let response = await getCities();
+        setCities(response.data);
+    }
+
+    console.log('MMMMMMVVV??????', locate)
 
     const onValueChange = (e) => {
         setLocate({...locate, [e.target.name]: e.target.value})
@@ -93,7 +92,7 @@ const AddLocations = () => {
                         <div className="col-md-6 mb-3 mt-3">
                             <label  htmlFor="street"><span > Street Name</span>
                             </label>
-                            <input type="name" className="form-control"  name="street_name" value={street_name} placeholder="street name" onChange={(e) => onValueChange(e)}/>
+                            <input type="text" className="form-control"  name="street_name" value={street_name} placeholder="street name" onChange={(e) => onValueChange(e)}/>
                         </div>
 
                         <div className="col-md-2 mb-3 mt-3">
@@ -108,10 +107,10 @@ const AddLocations = () => {
                             <input type="text" className="form-control" name="status" value={status} placeholder="status" onChange={(e) => onValueChange(e)}/>
                         </div>
 
-                        {/* <div class="col-md-4 shadow-sm p-3 mb-5 bg-body rounded">
-                            <label for="sel1" class="form-label">Select city:</label>
-                            <select class="form-select" id="sel1"  placeholder="Select City" onChange={selectChoice}>
-                            {locate.map(item => {  
+                        <div class="col-md-4 shadow-sm p-3 mb-5 bg-body rounded">
+                            <label htmlFor="sel1" class="form-label">Select city:</label>
+                            <select class="form-select" name="city" id="sel2"  placeholder="Select City" onChange={(e) => onValueChange(e)}>
+                            {cities.map(item => {  
                                     return (
                                     <option key={item.id} value={item.id}>
                                         {item.name}
@@ -119,7 +118,7 @@ const AddLocations = () => {
                                     );
                                     })} 
                             </select>
-                        </div> */}
+                        </div>
 
                         <div className="col-md-12 mb-3 mt-3" style={{textAlign:'center',}}>
                             <Button type="button" class="btn btn-secondary" onClick={() => AddLocationsDetails()}>Add Locations</Button>

@@ -29,7 +29,7 @@ const EditEvents = () => {
     const classes = useStyles();
     const { id } = useParams();
     const [event, setEvents] = useState(initialValue);
-    const {name, description, event_date, select} = event;
+    const {name, description, event_date,} = event;
 
 
     useEffect(() => {
@@ -42,19 +42,15 @@ const EditEvents = () => {
         setEvents(response.data);
     }
 
-    console.log('AAAAAAA?????????', loadEventDetails)
-
 
     const onValueChange = (e) => {
         console.log(e.target.value);
         setEvents({...event, [e.target.name]: e.target.value})
     }
 
-    console.log('DDDDDDDDDD????????????', onValueChange)
-
     const addEventDetails = async() => {
         await editEvent(id, event);
-        navigate.push('/all');
+        navigate("/all", { replace: true });
     }
     
     return (
@@ -65,17 +61,17 @@ const EditEvents = () => {
 
                     <div className="col-md-4 mb-3 mt-3">
                         <label  for="name">Name</label>
-                        <input type="text" value={name}  name="name" placeholder="Name" className="form-control" onChange={(e) => onValueChange(e.target.value)}/>
+                        <input type="text" value={name}  name="name" placeholder="Name" className="form-control" onChange={(e) => onValueChange(e)}/>
                     </div>
 
                     <div className="col-md-4 mb-3 mt-3">
                         <label for="date">Date</label>
-                        <input type="date" value={event_date} name="date" placeholder="2022-02-13" className="form-control" onChange={(e) => onValueChange(e.target.value)}/>
+                        <input type="date" value={event_date} name="date" placeholder="2022-02-13" className="form-control" onChange={(e) => onValueChange(e)}/>
                     </div>
 
                     <div className="col-md-6 mb-3 mt-3">
                         <label for="comment">Description</label>
-                        <textarea class="form-control" rows="5" id="comment" type="text" name="description" value={description} placeholder="event description" onChange={(e) => onValueChange(e.target.value)} style={{resize: 'none'}} ></textarea> 
+                        <textarea class="form-control" rows="5" id="comment" type="text" name="description" value={description} placeholder="event description" onChange={(e) => onValueChange(e)} style={{resize: 'none'}} ></textarea> 
                     </div>
 
                     <div className="col-md-2 mb-3 mt-3">

@@ -16,7 +16,7 @@ export const deleteEvent = async (id) => {
 }
 
 export const editEvent = async (id, event) => {
-    return await axios.put(`/${eventsUrl}${id}/`, `${event}`)
+    return await axios.put(`${id}/`, `${event}`)
 }
 
 
@@ -52,7 +52,7 @@ export const getLocations = async (id) => {
 }
 
 export const addLocations = async (locate) => {
-    return await axios.post(`${locateUrl}`, locate);
+    return await axios.post(locateUrl, locate);
 }
 
 export const deleteLocations = async (id) => {
