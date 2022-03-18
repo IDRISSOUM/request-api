@@ -8,7 +8,7 @@ export const getEvents = async (id) => {
 }
 
 export const addEvent = async (event) => {
-    return await axios.post(`${eventsUrl}`, event);
+    return await axios.post(eventsUrl, event);
 }
 
 export const deleteEvent = async (id) => {

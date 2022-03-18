@@ -45,13 +45,12 @@ const AddLocations = () => {
     let navigate = useNavigate();
 
     const onValueChange = (e) => {
-        console.log(e.target.value);
         setLocate({...locate, [e.target.name]: e.target.value})
     }
 
     const AddLocationsDetails = async() => {
         await addLocations(locate);
-        navigate.push('./all');
+        navigate("/all-l", { replace: true });;
     }
 
     return (
@@ -60,53 +59,53 @@ const AddLocations = () => {
                     <h1 style={{justifyContent: 'center', textAlign: 'center', fontWeight: 'bold', fontSize: 30}}>New Location</h1>
                     <div className="row jumbotron justify-content-center">
                         <div className="col-md-6 mb-3 mt-3 ">
-                            <label  for="name">Name</label>
-                            <input type="text" value={name}  placeholder="Name" className="form-control" onChange={(e) => onValueChange(e.target.value)}/>
+                            <label  htmlFor="name"> Name</label>
+                            <input type="text" value={name} name="name" placeholder="name" className="form-control" onChange={(e) => onValueChange(e)}/>
                         </div>
 
                         <div className="col-md-6 mb-3 mt-3">
-                            <label  for="rent">Rent</label>
-                            <input type="text" value={rent}  placeholder="Rent" className="form-control" onChange={(e) => onValueChange(e.target.value)}/>
+                            <label  htmlFor="rent">Rent</label>
+                            <input type="text" value={rent}  name="rent" placeholder="Rent" className="form-control" onChange={(e) => onValueChange(e)}/>
                         </div>
 
                         <div className="col-md-6 mb-3 mt-3">
-                            <label  for="email">Email</label>
-                            <input type="email" value={email}  placeholder="johndoe@joecorp.de" className="form-control" onChange={(e) => onValueChange(e.target.value)}/>
+                            <label  htmlFor="email">Email</label>
+                            <input type="email" value={email} name="email" placeholder="johndoe@joecorp.de" className="form-control" onChange={(e) => onValueChange(e)}/>
                         </div>
 
                         <div className="col-md-6 mb-3 mt-3">
-                            <label  for="phone">Phone</label>
-                            <input type="tel" value={phone} placeholder="+49 (012) 308" className="form-control" onChange={(e) => onValueChange(e.target.value)} />
+                            <label  htmlFor="phone">Phone</label>
+                            <input type="tel" value={phone} name="phone" placeholder="+49 (012) 308" className="form-control" onChange={(e) => onValueChange(e)} />
                         </div>
 
                         <div className="col-md-6 mb-3 mt-3">
-                            <label  for="coord"><span> Coordinates</span>
+                            <label  htmlFor="coordinates"><span> Coordinates</span>
                             </label>
-                            <input type="text" className="form-control" value={coordinates} placeholder="49.045,10.442" onChange={(e) => onValueChange(e.target.value)}/>
+                            <input type="text" className="form-control" name="coordinates" value={coordinates} placeholder="49.045,10.442" onChange={(e) => onValueChange(e)}/>
                         </div>
 
                         <div className="col-md-6 mb-3 mt-3">
-                            <label  for="street"><span > Street Number</span>
+                            <label  htmlFor="street"><span > Street Number</span>
                             </label>
-                            <input type="text" className="form-control" value={street_number}  placeholder="Street Number" onChange={(e) => onValueChange(e.target.value)}/>
+                            <input type="number" className="form-control"  name="street_number" value={street_number}  placeholder="Street Number" onChange={(e) => onValueChange(e)}/>
                         </div>
 
                         <div className="col-md-6 mb-3 mt-3">
-                            <label  for="street"><span > Street Name</span>
+                            <label  htmlFor="street"><span > Street Name</span>
                             </label>
-                            <input type="text" className="form-control" value={street_name} placeholder="street name" onChange={(e) => onValueChange(e.target.value)}/>
+                            <input type="name" className="form-control"  name="street_name" value={street_name} placeholder="street name" onChange={(e) => onValueChange(e)}/>
                         </div>
 
                         <div className="col-md-2 mb-3 mt-3">
-                            <label  for="code"><span > Code Postal</span>
+                            <label  htmlFor="postal_code"><span > Code Postal</span>
                             </label>
-                            <input type="text" className="form-control" value={postal_code} placeholder="code postal" onChange={(e) => onValueChange(e.target.value)}/>
+                            <input type="text" className="form-control" name="postal_code" value={postal_code} placeholder="code postal" onChange={(e) => onValueChange(e)}/>
                         </div>
 
                         <div className="col-md-4 mb-3 mt-3">
-                            <label  for="status"><span > Status</span>
+                            <label  htmlFor="status"><span > Status</span>
                             </label>
-                            <input type="text" className="form-control" value={status} placeholder="status" onChange={(e) => onValueChange(e.target.value)}/>
+                            <input type="text" className="form-control" name="status" value={status} placeholder="status" onChange={(e) => onValueChange(e)}/>
                         </div>
 
                         {/* <div class="col-md-4 shadow-sm p-3 mb-5 bg-body rounded">
@@ -123,8 +122,8 @@ const AddLocations = () => {
                         </div> */}
 
                         <div className="col-md-12 mb-3 mt-3" style={{textAlign:'center',}}>
-                            <Button onClick={() => AddLocationsDetails()}>Add Locations</Button>
-                            <Link to="/all-l" className="col-md-12" style={{textAlign:'center',}}><Button className="btn btn-danger m-3">Cancel</Button></Link>
+                            <Button type="button" class="btn btn-secondary" onClick={() => AddLocationsDetails()}>Add Locations</Button>
+                            <Link to="/all-l" className="col-md-12" style={{textAlign:'center',}}><Button type="button" class="btn btn-danger m-3">Cancel</Button></Link>
                         </div>
                         
                     </div>

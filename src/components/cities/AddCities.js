@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { FormGroup, FormControl, InputLabel, Input, Button, makeStyles, Typography } from '@material-ui/core';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { addCities } from '../../service/api';
 
 const initialValue = {
@@ -31,24 +31,31 @@ const AddCities = () => {
 
     const addCitiesDetails = async() => {
         await addCities(cities);
-        navigate.push('./all');
+        navigate("/all-ci", { replace: true });
     }
 
     return (
-        <FormGroup className={classes.container}>
-            <Typography variant="h4">Add Cities</Typography>
-            <FormControl>
-                <InputLabel htmlFor="my-input">Name</InputLabel>
-                <Input value={name} name="name" onChange={(e) => onValueChange(e)} id="my-input" />
-            </FormControl>
-            <FormControl>
-                <InputLabel htmlFor="my-input">Code</InputLabel>
-                <Input value={code} name="code" onChange={(e) => onValueChange(e)} id="my-input" />
-            </FormControl>
-            <FormControl>
-                <Button variant="contained" color="primary" onClick={() => addCitiesDetails()}>Add Cities</Button>
-            </FormControl>
-        </FormGroup>
+        <div className="container p-5">
+            <form className="form-group">
+                <h1 style={{justifyContent: 'center', textAlign: 'center', fontWeight: '500', fontSize: 30}}>New Event</h1>
+                <div className="row jumbotron justify-content-center">
+
+                    <div className="col-md-4 mb-3 mt-3">
+                        <label  htmlFor="name">Name</label>
+                        <input type="text" name="name" placeholder="Name" className="form-control" onChange={(e) => onValueChange(e)}  value={name} />
+                        <br/>
+                        <label htmlFor="code">Code</label>
+                        <input type="number" name="code" placeholder="4567" className="form-control" onChange={(e) => onValueChange(e)} value={code}/>
+                    </div>
+
+                    <br/>
+                    <div className="col-md-12 mb-3 mt-3" style={{textAlign:'center',}}>
+                        <Button type="button" class="btn btn-secondary" onClick={() => addCitiesDetails()}>Add Locations</Button>
+                        <Link to="/all-ci" className="col-md-12" style={{textAlign:'center',}}><Button class="btn btn-danger m-3">Cancel</Button></Link>
+                    </div>
+                </div>
+            </form>
+        </div>
     )
 }
 

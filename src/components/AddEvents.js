@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { addEvent, getLocations } from '../service/api';
-import {useNavigate} from 'react-router-dom'
+import {useNavigate, Link} from 'react-router-dom'
 import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
 import { Typography, makeStyles } from '@material-ui/core';
-import {Link} from 'react-router-dom';
 import moment from 'moment'
 
 
@@ -11,8 +10,8 @@ import moment from 'moment'
 // const initialValue = {
 //     name: '',
 //     description: '',
-//     event_date: '',
-// // }
+//     event_date,
+//  }
 // let select = moment(initialValue.event_date).format('YYYY-MM-DD');
 
 
@@ -30,49 +29,22 @@ const useStyles = makeStyles({
 
 
 const AddEvents = () => {
+
+
     let navigate = useNavigate();
     const classes = useStyles();
-    const [event, setEvents] = useState({});
-    const [name, setName] = useState("");
-    const [description, setDescription] = useState("")
-    const [event_date, setEvent_date] = useState(moment("").format('YYYY-MM-DD'))
-    // const [sel, setEvent_date] = useState("")
-    // const {name, description, event_date, location} = event;
-    // const [title, setTitle] = useState('')
     const [locate, setLocate] = useState([]);
+    const [selectlocations, setSelectLocations] = useState();
+    const [event, setEvents] = useState({
+        location: 102,
+        name: '',
+        description: '',
+        event_date: '',
+     });
+     const {name, description, event_date, location} = event;
+    console.log('LLL??????????>>>>>>>>>', event)
+    console.log('LLL??????????', selectlocations)
 
-
-    // const onValueChange = (e) => {
-    //     console.log('value:::::::', e.target.value);
-    //     setEvents({...event, [e.target.name]: e.target.value})
-    // }
-
-    const onValueEvent = (e) => {
-        console.log(e.target.value);
-        setLocate({...locate, [e.target.locate]: e.target.value})
-    }
-
-    const handleLogin = () => {
-        console.log(name, description, event_date);
-      };
-
-    const addEventDetails = async() => {
-        await addEvent(event);
-        navigate.push('./all');
-    }
-    
-    const handleNameChange = (e) => {
-        setName(e.target.value);
-      };
-    
-      const handleDescriptionChange = (e) => {
-        setDescription(e.target.value);
-      };
-
-      const handleEventDateChange = (e) => {
-        setEvent_date(e.target.value);
-      };
-    
 
     useEffect(() => {
         getAllLocations();
@@ -83,6 +55,29 @@ const AddEvents = () => {
         setLocate(response.data);
     }
 
+    const choiceLocations = function(e) {
+        setSelectLocations(e.target.value)
+    }
+
+    const onValueChange = (e) => {
+        setEvents({...event, [e.target.name]: e.target.value})
+    }
+
+    // const onValueEvent = (e) => {
+    //     console.log(e.target.value);
+    //     setLocate({...locate, [e.target.locate]: e.target.value})
+    // }
+
+    
+
+    const addEventDetails = async() => {
+        await addEvent(event);
+        navigate("/all", { replace: true });
+    }
+
+
+
+
 
     return (
         <div className="container p-5">
@@ -91,23 +86,23 @@ const AddEvents = () => {
                 <div className="row jumbotron justify-content-center">
 
                     <div className="col-md-4 mb-3 mt-3">
-                        <label  for="name">Name</label>
-                        <input type="text" value={name}  name="name" placeholder="Name" className="form-control" onChange={ handleNameChange} />
+                        <label  htmlFor="name">Name</label>
+                        <input type="text" name="name" placeholder="Name" className="form-control" onChange={(e) => onValueChange(e)}  value={name} />
                     </div>
 
                     <div className="col-md-4 mb-3 mt-3">
-                        <label for="date">Date</label>
-                        <input type="date" value={event_date} name="date" placeholder="2022-02-13" className="form-control" onChange={handleEventDateChange}/>
+                        <label htmlFor="event_date">Date</label>
+                        <input type="date" name="event_date" placeholder="2022-02-13" className="form-control" onChange={(e) => onValueChange(e)} value={event_date}/>
                     </div>
 
                     <div className="col-md-6 mb-3 mt-3">
-                        <label for="comment">Description</label>
-                        <textarea className="form-control" rows="5" id="comment" type="text" name="description" value={description} placeholder="event description" onChange={handleDescriptionChange} style={{resize: 'none'}} ></textarea> 
+                        <label htmlFor="comment">Description</label>
+                        <textarea className="form-control" rows="5" id="comment" type="text" name="description" placeholder="event description" onChange={(e) => onValueChange(e)} style={{resize: 'none'}} value={description} ></textarea> 
                     </div>
 
                     <div className="col-md-2 mb-3 mt-3">
-                        <label for="sel1" className="form-label">Select location:</label>
-                        <select className="form-select" id="sel2" name="select" value={locate} placeholder="Select location"onChange={(e) => onValueEvent(e.target.value)} >
+                        <label htmlFor="sel1" className="form-label">Select location:</label>
+                        <select className="form-select" id="sel2" name="select"  placeholder="Select location" onChange={choiceLocations} >
                             {locate.map(item => {  
                                 return (
                                 <option key={item.id} value={item.id}>
@@ -118,7 +113,7 @@ const AddEvents = () => {
 
                     <br/>
                     <div className="mb-3 mt-3" style={{textAlign:'center', marginTop: -40}}>
-                        <Button onClick={() => addEventDetails() (console.log('mmmmmmmmm???????????', addEventDetails()))}>Add Events</Button>
+                        <Button onClick={() => addEventDetails()}>Add Events</Button>
                         <Link to="/all" className="col-md-12" style={{textAlign:'center',}}><Button className="btn btn-danger m-3">Cancel</Button></Link>
                     </div>
                         
