@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Table, TableHead, TableCell, Paper, TableRow, TableBody, Button, makeStyles } from '@material-ui/core'
 import { getEvents, deleteEvent } from '../service/api';
 import { Link } from 'react-router-dom';
+import { Card, Input } from 'semantic-ui-react'
 
 
 const useStyles = makeStyles({
@@ -24,12 +25,27 @@ const useStyles = makeStyles({
 })
 
 function AllEvents() {
+    const [filteredResults, setFilteredResults] = useState([]);
+    const [searchInput, setSearchInput] = useState('');
     const [events, setEvents] = useState([]);
     const classes = useStyles();
 
     useEffect(() => {
         getAllEvents();
     }, []);
+
+    const searchItems = (searchValue) => {
+        setSearchInput(searchValue)
+        if (searchInput !== '') {
+            const filteredData = events.filter((item) => {
+                return Object.values(item).join('').toLowerCase().includes(searchInput.toLowerCase())
+            })
+            setFilteredResults(filteredData)
+        }
+        else{
+            setFilteredResults(events)
+        }
+    }
 
 
     const getAllEvents = async () => {
@@ -47,7 +63,12 @@ function AllEvents() {
 
     return (
         <>
-      <Table className={classes.table}>
+        <div style={{ padding: 20 }}>
+            <Input icon='search'
+                placeholder='Search...'
+                onChange={(e) => searchItems(e.target.value)}
+            />
+        <Table className={classes.table}>
             <TableHead>
                 <TableRow className={classes.thead}>
                     <TableCell>Nº</TableCell>
@@ -60,29 +81,54 @@ function AllEvents() {
                 </TableRow>
             </TableHead>
             <TableBody>
-                {events.map((event) => (
-                    <TableRow className={classes.row} key={event.id}>
-                        <TableCell>{event.id}</TableCell>
-                        <TableCell>{event.name}</TableCell>
-                        <TableCell>{event.location}</TableCell>
-                        <TableCell>{event.event_date}</TableCell>
-                        <TableCell>{event.description}</TableCell>
-                        <TableCell>{event.created}</TableCell>
-                        <TableCell>{event.status}</TableCell>
-                        <TableCell>
-                            <Button color="primary" variant="contained" style={{marginRight:5}} component={Link} to={`/edit/${event.id}`}>Edit</Button>
-                        </TableCell>
-                        <TableCell>
-                            <Button color="secondary" variant="contained" onClick={() => deleteEventData(event.id)}>Delete</Button> 
-                        </TableCell>
-                    </TableRow>
-                ))}
+                {searchInput.length > 1 ? (
+                    filteredResults.map((item) => {
+                        return(
+                            <TableRow className={classes.row} key={item.id}>
+                                <TableCell>{item.id}</TableCell>
+                                <TableCell>{item.name}</TableCell>
+                                <TableCell>{item.location}</TableCell>
+                                <TableCell>{item.item_date}</TableCell>
+                                <TableCell>{item.description}</TableCell>
+                                <TableCell>{item.created}</TableCell>
+                                <TableCell>{item.status}</TableCell>
+                                <TableCell>
+                                    <Button color="primary" variant="contained" style={{marginRight:5}} component={Link} to={`/edit/${item.id}`}>Edit</Button>
+                                </TableCell>
+                                <TableCell>
+                                    <Button color="secondary" variant="contained" onClick={() => deleteEventData(item.id)}>Delete</Button> 
+                                </TableCell>
+                            </TableRow>
+                        )
+                    })
+                ) : (
+                    events.map((item) => {
+                        return(
+                            <TableRow className={classes.row} key={item.id}>
+                                <TableCell>{item.id}</TableCell>
+                                <TableCell>{item.name}</TableCell>
+                                <TableCell>{item.location}</TableCell>
+                                <TableCell>{item.item_date}</TableCell>
+                                <TableCell>{item.description}</TableCell>
+                                <TableCell>{item.created}</TableCell>
+                                <TableCell>{item.status}</TableCell>
+                                <TableCell>
+                                    <Button color="primary" variant="contained" style={{marginRight:5}} component={Link} to={`/edit/${item.id}`}>Edit</Button>
+                                </TableCell>
+                                <TableCell>
+                                    <Button color="secondary" variant="contained" onClick={() => deleteEventData(item.id)}>Delete</Button> 
+                                </TableCell>
+                            </TableRow>
+                        )
+                    })
+                )}
             </TableBody>
         </Table>
-        <br/>
-        <div className="d-flex justify-content-center">
-         <Link to="/add" type="button" className="btn btn-secondary ml-2"><Button>Add Event</Button></Link>
-        </div>
+            <br/>
+            <div className="d-flex justify-content-center">
+                <Link to="/add" type="button" className="btn btn-secondary ml-2"><Button>Add Event</Button></Link>
+            </div>
+            </div>
      </>
     )
 }

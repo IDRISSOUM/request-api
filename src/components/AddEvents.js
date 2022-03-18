@@ -8,12 +8,12 @@ import moment from 'moment'
 
 
 
-const initialValue = {
-    name: '',
-    description: '',
-    event_date: '',
-}
-let select = moment(initialValue.event_date).format('YYYY-MM-DD');
+// const initialValue = {
+//     name: '',
+//     description: '',
+//     event_date: '',
+// // }
+// let select = moment(initialValue.event_date).format('YYYY-MM-DD');
 
 
 const useStyles = makeStyles({
@@ -32,28 +32,48 @@ const useStyles = makeStyles({
 const AddEvents = () => {
     let navigate = useNavigate();
     const classes = useStyles();
-    const [event, setEvents] = useState(initialValue);
-    const {name, description, event_date, location} = event;
+    const [event, setEvents] = useState({});
+    const [name, setName] = useState("");
+    const [description, setDescription] = useState("")
+    const [event_date, setEvent_date] = useState(moment("").format('YYYY-MM-DD'))
+    // const [sel, setEvent_date] = useState("")
+    // const {name, description, event_date, location} = event;
     // const [title, setTitle] = useState('')
     const [locate, setLocate] = useState([]);
 
 
-    const onValueChange = (e) => {
-        let {name, value} = e.target.value;
-        console.log('value:::::::', e.target.value);
-        setEvents({...event, [name]: value});
-    }
-    
-    // const onValueEvent = (e) => {
-    //     console.log(e.target.value);
-    //     setLocate({...locate, [e.target.locate]: e.target.value})
+    // const onValueChange = (e) => {
+    //     console.log('value:::::::', e.target.value);
+    //     setEvents({...event, [e.target.name]: e.target.value})
     // }
+
+    const onValueEvent = (e) => {
+        console.log(e.target.value);
+        setLocate({...locate, [e.target.locate]: e.target.value})
+    }
+
+    const handleLogin = () => {
+        console.log(name, description, event_date);
+      };
 
     const addEventDetails = async() => {
         await addEvent(event);
         navigate.push('./all');
     }
     
+    const handleNameChange = (e) => {
+        setName(e.target.value);
+      };
+    
+      const handleDescriptionChange = (e) => {
+        setDescription(e.target.value);
+      };
+
+      const handleEventDateChange = (e) => {
+        setEvent_date(e.target.value);
+      };
+    
+
     useEffect(() => {
         getAllLocations();
     }, []);
@@ -72,33 +92,33 @@ const AddEvents = () => {
 
                     <div className="col-md-4 mb-3 mt-3">
                         <label  for="name">Name</label>
-                        <input type="text" name="name" placeholder="Name" className="form-control" onChange={onValueChange} />
+                        <input type="text" value={name}  name="name" placeholder="Name" className="form-control" onChange={ handleNameChange} />
                     </div>
 
                     <div className="col-md-4 mb-3 mt-3">
                         <label for="date">Date</label>
-                        <input type="date" name="date" placeholder="2022-02-13" className="form-control" onChange={ onValueChange}/>
+                        <input type="date" value={event_date} name="date" placeholder="2022-02-13" className="form-control" onChange={handleEventDateChange}/>
                     </div>
 
                     <div className="col-md-6 mb-3 mt-3">
                         <label for="comment">Description</label>
-                        <textarea className="form-control" rows="5" id="comment" type="text" name="description" placeholder="event description" onChange={onValueChange} style={{resize: 'none'}} ></textarea> 
+                        <textarea className="form-control" rows="5" id="comment" type="text" name="description" value={description} placeholder="event description" onChange={handleDescriptionChange} style={{resize: 'none'}} ></textarea> 
                     </div>
 
                     <div className="col-md-2 mb-3 mt-3">
                         <label for="sel1" className="form-label">Select location:</label>
-                        {/* <select className="form-select" id="sel2" name="select" value={location} placeholder="Select location"onChange={(e) => onValueEvent(e.target.value)} >
+                        <select className="form-select" id="sel2" name="select" value={locate} placeholder="Select location"onChange={(e) => onValueEvent(e.target.value)} >
                             {locate.map(item => {  
                                 return (
                                 <option key={item.id} value={item.id}>
                                     {item.name}
                                 </option>)})}
-                        </select> */}
+                        </select>
                     </div>
 
                     <br/>
                     <div className="mb-3 mt-3" style={{textAlign:'center', marginTop: -40}}>
-                        <Button onClick={() => addEventDetails()}>Add Events</Button>
+                        <Button onClick={() => addEventDetails() (console.log('mmmmmmmmm???????????', addEventDetails()))}>Add Events</Button>
                         <Link to="/all" className="col-md-12" style={{textAlign:'center',}}><Button className="btn btn-danger m-3">Cancel</Button></Link>
                     </div>
                         
